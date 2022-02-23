@@ -68,7 +68,7 @@ app.post("/register", (req, res) => {
   const { name, email, password } = req.body;
   User.findOne({ email: email }, (err, user) => {
     if (user) {
-      res.send({ message: "user is already exist🚫🚫🚫" });
+      res.send({ message: "User is already exist🚫🚫🚫" });
     } else {
       const user = new User({
         name,
@@ -85,19 +85,6 @@ app.post("/register", (req, res) => {
     }
   });
 });
-
-if ( process.env.NODE_ENV == "production"){
-
-  app.use(express.static("client/build"));
-
-  const path = require("path");
-
-  app.get("*", (req, res) => {
-
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-
-  })
-}
 
 const PORT = process.env.PORT || 5000;
 
